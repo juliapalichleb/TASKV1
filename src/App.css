@@ -5,6 +5,14 @@
   text-align: center;
 }
 
+.gap-x-2 {
+  column-gap: 10px;
+}
+
+.gap-y-2 {
+  row-gap: 10px;
+}
+
 .flex {
   display: flex;
 }
@@ -28,7 +36,20 @@
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+
+
 }
+  .red {
+    background-color: #f44336;
+  }
+
+  .green {
+    background-color: #5cb85c;
+  }
+
+  .blue {
+    background-color: #5c71b8;
+  }
 
 label {
   text-align: left;
