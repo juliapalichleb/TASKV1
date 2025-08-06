@@ -162,3 +162,10 @@ input:focus {
   background-color: #555;
   border-radius: 4px;
 }
+
+.main-content-container {
+   display: flex;
+    gap: 200px;
+    justify-content: center ;
+    align-items: center;
+}

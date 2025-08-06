@@ -1,4 +1,4 @@
-import type {Product} from "../../types/Product.ts";
+import type {Product} from "../Product/Product.ts";
 import {ProductCard} from "./ProductCard.tsx";
 
 const ProductList = ({ allProducts }: { allProducts: Product[] }) => {
