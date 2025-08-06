@@ -91,6 +91,8 @@ input:focus {
   box-shadow: 0 0 0 2px rgba(136, 136, 136, 0.2);
 }
 .product-card {
+  display: flex;
+  flex-direction: column;
   background-color: #1c1c1c;
   border: 1px solid #333;
   border-radius: 10px;

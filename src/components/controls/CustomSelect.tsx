@@ -1,15 +1,18 @@
-import type {ChangeEvent} from "react";
-
-type CustomSelectProps = {
+type CustomSelectProps<T extends string> = {
   id: string;
   label: string;
-  value: string;
-  options: {displayName: string, value: string}[];
-  onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
+  value: T;
+  options: { displayName: string; value: T }[];
+  onChange: (value: T) => void;
 };
 
-const CustomSelect = ({ id, label, value, options, onChange}: CustomSelectProps) => {
-
+function CustomSelect<T extends string>({
+  id,
+  label,
+  value,
+  options,
+  onChange,
+}: CustomSelectProps<T>) {
   return (
     <div>
       <label htmlFor={id}>
@@ -18,12 +21,11 @@ const CustomSelect = ({ id, label, value, options, onChange}: CustomSelectProps)
           id={id}
           name={id}
           value={value}
-          onChange={onChange}
+          onChange={(e) => onChange(e.target.value as T)}
         >
           <option disabled value="">
-            -- Select a product --
+            -- Select an option --
           </option>
-
           {options.map((option) => (
             <option key={option.value} value={option.value}>
               {option.displayName}
@@ -33,6 +35,6 @@ const CustomSelect = ({ id, label, value, options, onChange}: CustomSelectProps)
       </label>
     </div>
   );
-};
+}
 
 export { CustomSelect };

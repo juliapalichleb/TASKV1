@@ -1,24 +1,18 @@
 
 export interface SodaDto {
-  name: string;
-  price: number;
   brand?: string;
   flavor?: string;
-  packageType: 'can' | 'plasticBottle' | 'glassBottle';
-  servingSize?: number;
+  packageType: SodaType;
+  servingSize?: string;
 }
 
 export interface ShampooDto {
-  name: string;
-  price: number;
   brand?: string;
   scent?: string;
-  bottleSize?: number;
+  bottleSize?: string;
 }
 
 export interface ShoesDto {
-  name: string;
-  price: number;
   brand?: string;
   shoeSize?: string;
   shoeColor?: string;
@@ -27,9 +21,10 @@ export interface ShoesDto {
 
 
 export type Product =
-  | { type: 'shoe'; data: ShoesDto }
-  | { type: 'shampoo'; data: ShampooDto }
-  | { type: 'soda'; data: SodaDto };
+  | { type: ProductType.Shoe; name: string; price: string; details: ShoesDto }
+  | { type: ProductType.Shampoo; name: string; price: string; details: ShampooDto }
+  | { type: ProductType.Soda; name: string; price: string; details: SodaDto };
+
 
 
 export enum ProductType {
@@ -48,6 +43,7 @@ export enum GenderType {
     Female = 'female',
     Unisex = 'unisex',
 }
+
 export const GenderTypeDisplayNames: Record<GenderType, string> = {
   [GenderType.Male]: "Male",
   [GenderType.Female]: "Female",
