@@ -25,7 +25,6 @@ enum ProductType {
 }
 
 
-
 const ProductTypeDisplayNames: Record<ProductType, string> = {
   [ProductType.Soda]: "Soda",
   [ProductType.Shampoo]: "Shampoo",

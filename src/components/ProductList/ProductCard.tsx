@@ -1,7 +1,7 @@
 import {ProductFactory, type Products} from "../Product/Product.ts";
 
 
-const ProductCard = ({product}: {product: Products}) => {;
+const ProductCard = ({product}: {product: Products}) => {
   const productEl = ProductFactory.createProduct(product.type)
   const ProductTemplate = productEl.getTemplateComponent();
 
