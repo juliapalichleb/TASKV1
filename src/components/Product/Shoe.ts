@@ -1,4 +1,4 @@
-import {type Product, ProductType} from "./Product.ts";
+import type {Product} from "./Product.ts";
 import {Gender} from "../../types/Gender.ts";
 import {ShoeForm} from "./Forms/ShoeForm.tsx";
 import {ShoeTemplate} from "./ProductTemplate/ShoeTemplate.tsx";
@@ -12,8 +12,7 @@ interface ShoeDto {
   gender: Gender;
 }
 
-class Shoe implements Product<ShoeDto, ProductType.Shoe> {
-  constructor() {}
+class Shoe implements Product<"shoe"> {
 
   getFormComponent() {
     return ShoeForm

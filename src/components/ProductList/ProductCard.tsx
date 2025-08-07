@@ -1,15 +1,17 @@
-import {ProductFactory, type Products} from "../Product/Product.ts";
+import type {Product, ProductType} from "../Product/Product.ts";
 
 
-const ProductCard = ({product}: {product: Products}) => {
-  const productEl = ProductFactory.createProduct(product.type)
-  const ProductTemplate = productEl.getTemplateComponent();
+type ProductCardProps = {
+  product: Product<ProductType>;
+};
 
+const ProductCard = ({ product }: ProductCardProps) => {
+  const ProductTemplate = product.getTemplateComponent();
   return (
-      <div className="product-card">
-          <ProductTemplate details={product.details}/>
-      </div>
+    <div className="product-card">
+      <ProductTemplate details={product.details} />
+    </div>
   );
 };
 
-export {ProductCard};
+export {ProductCard}

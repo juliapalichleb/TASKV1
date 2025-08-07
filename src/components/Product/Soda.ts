@@ -1,6 +1,7 @@
 import {SodaTemplate} from "./ProductTemplate/SodaTemplate.tsx";
 import {SodaForm} from "./Forms/SodaForm.tsx";
-import {type Product, ProductType} from "./Product.ts";
+import type {Product} from "./Product.ts";
+
 
 interface SodaDto {
   name: string;
@@ -24,8 +25,7 @@ const SodaPackageDisplayNames: Record<SodaPackage, string> = {
 };
 
 
-class Soda implements Product<SodaDto, ProductType.Soda> {
-  constructor() {}
+class Soda implements Product<"soda"> {
 
   getFormComponent() {
     return SodaForm

@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { CustomInput } from "../../controls/CustomInput.tsx";
-import {ProductType } from "../Product.ts";
 import type {ShampooDto} from "../Shampoo.ts";
 
 
-const ShampooForm = ({onAdd}: {onAdd: (product: { type: ProductType.Shampoo, details: ShampooDto }) => void }) => {
+const ShampooForm = ({onAdd}: {onAdd: (product: { type: 'shampoo', details: ShampooDto }) => void }) => {
   const [shampoo, setShampoo] = useState<ShampooDto>({
     name: "",
     price: "",
@@ -19,7 +18,7 @@ const ShampooForm = ({onAdd}: {onAdd: (product: { type: ProductType.Shampoo, det
 
   const handleSubmit = () => {
     console.log("Shampoo submitted:", shampoo);
-    onAdd({type: ProductType.Shampoo, details: shampoo})
+    onAdd({type: 'shampoo', details: shampoo})
   };
 
   return (

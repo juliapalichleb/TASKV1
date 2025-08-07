@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { CustomInput } from "../../controls/CustomInput.tsx";
 import { CustomSelect } from "../../controls/CustomSelect.tsx";
-import {ProductType} from "../Product.ts";
 import {type SodaDto, SodaPackage, SodaPackageDisplayNames} from "../Soda.ts";
 
 
 
-const SodaForm = ({onAdd}: {onAdd: (product: { type: ProductType.Soda, details: SodaDto }) => void }) => {
+const SodaForm = ({onAdd}: {onAdd: (product: { type: 'soda', details: SodaDto }) => void }) => {
   const [soda, setSoda] = useState<SodaDto>({
     name: "",
     price: "",
@@ -30,7 +29,7 @@ const SodaForm = ({onAdd}: {onAdd: (product: { type: ProductType.Soda, details: 
 
   const handleSubmit = () => {
     console.log("Soda submitted:", soda);
-    onAdd({type: ProductType.Soda, details: soda})
+    onAdd({type: 'soda', details: soda})
   };
 
   return (

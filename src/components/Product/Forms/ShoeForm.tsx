@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { CustomInput } from "../../controls/CustomInput.tsx";
 import { CustomSelect } from "../../controls/CustomSelect.tsx";
-import {
-    ProductType
-} from "../Product.ts";
+
 import {Gender, GenderTypeDisplayNames} from "../../../types/Gender.ts";
 import type {ShoeDto} from "../Shoe.ts";
 
-const ShoeForm = ({onAdd}: {onAdd: (product: { type: ProductType.Shoe, details: ShoeDto }) => void }) => {
+const ShoeForm = ({onAdd}: {onAdd: (product: { type: "shoe", details: ShoeDto }) => void }) => {
   const [shoe, setShoe] = useState<ShoeDto>({
     name: "",
     price: "",
@@ -27,7 +25,7 @@ const ShoeForm = ({onAdd}: {onAdd: (product: { type: ProductType.Shoe, details: 
   };
 
   const handleSubmit = () => {
-    onAdd({type: ProductType.Shoe, details: shoe})
+    onAdd({type: 'shoe', details: shoe})
   };
 
   return (

@@ -1,12 +1,13 @@
 import "./App.css";
-import {type Products} from "./components/Product/Product.ts";
+import {type Product, type ProductType} from "./components/Product/Product.ts";
 import {ProductList} from "./components/ProductList/ProductList.tsx";
 import {useState} from "react";
 import {ProductCreator} from "./components/ProductCreator/ProductCreator.tsx";
 
 
+
 function App() {
-  const [products, setProduct] = useState<Products[]>([]);
+  const [products, setProduct] = useState<Product<ProductType>[]>([]);
 
   return (
     <div className="main-content-container">

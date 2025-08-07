@@ -1,27 +1,27 @@
 import {useState} from "react";
 import {CustomSelect} from "../controls/CustomSelect";
 import {
-   ProductFactory, type Products,
-  ProductType,
-  ProductTypeDisplayNames,
-
+  ProductRegistry, type ProductType, ProductTypeDisplayNames,
 } from "../Product/Product.ts";
+import type {Product} from "../Product/Product.ts";
 
 
 type ProductCreatorProps = {
-  onAddProduct: (product: Products) => void;
+  onAddProduct: (product: Product<ProductType>) => void;
 };
 
 const ProductCreator = ({ onAddProduct }: ProductCreatorProps) => {
-  const [productType, setProductType] = useState<ProductType>(ProductType.Soda);
+  const [productType, setProductType] = useState<ProductType>("soda" );
 
-  const productOptions = Object.values(ProductType).map((type) => ({
-    value: type,
-    displayName: ProductTypeDisplayNames[type],
+
+const productOptions = (Object.entries(ProductTypeDisplayNames) )
+  .map(([value , displayName]): {value: ProductType, displayName: string} => ({
+    value ,
+    displayName,
   }));
 
-  const productEl = ProductFactory.createProduct(productType)
-  const ProductForm = productEl.getFormComponent();
+  const ProductClass = new ProductRegistry[productType];
+  const ProductForm = ProductClass.getFormComponent();
 
   return (
     <div
