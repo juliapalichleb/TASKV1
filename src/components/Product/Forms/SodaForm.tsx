@@ -2,7 +2,8 @@ import { useState } from "react";
 import { CustomInput } from "../../controls/CustomInput.tsx";
 import { CustomSelect } from "../../controls/CustomSelect.tsx";
 import {ProductType} from "../Product.ts";
-import {type SodaDto, SodaPackage, SodaPackageDisplayNames} from "../../../types/Soda.ts";
+import {type SodaDto, SodaPackage, SodaPackageDisplayNames} from "../Soda.ts";
+
 
 
 const SodaForm = ({onAdd}: {onAdd: (product: { type: ProductType.Soda, details: SodaDto }) => void }) => {

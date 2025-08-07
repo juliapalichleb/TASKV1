@@ -1,5 +1,5 @@
-import type {ShampooDto} from "../Product.ts";
 import {ProductDetail} from "../../ProductList/ProductDetail.tsx";
+import type {ShampooDto} from "../Shampoo.ts";
 
 const ShampooTemplate = ({details}: {details: ShampooDto})  => {
   return (

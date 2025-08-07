@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {CustomSelect} from "../controls/CustomSelect";
 import {
-  type Product, productFactory,
+   ProductFactory, type Products,
   ProductType,
   ProductTypeDisplayNames,
 
@@ -9,7 +9,7 @@ import {
 
 
 type ProductCreatorProps = {
-  onAddProduct: (product: Product) => void;
+  onAddProduct: (product: Products) => void;
 };
 
 const ProductCreator = ({ onAddProduct }: ProductCreatorProps) => {
@@ -20,7 +20,8 @@ const ProductCreator = ({ onAddProduct }: ProductCreatorProps) => {
     displayName: ProductTypeDisplayNames[type],
   }));
 
-  const {FormComponent} = productFactory[productType]
+  const productEl = ProductFactory.createProduct(productType)
+  const ProductForm = productEl.getFormComponent();
 
   return (
     <div
@@ -34,7 +35,7 @@ const ProductCreator = ({ onAddProduct }: ProductCreatorProps) => {
         onChange={(e) => setProductType(e)}
       />
 
-      <FormComponent onAdd={(p) => onAddProduct(p)}/>
+      <ProductForm onAdd={(p) => onAddProduct(p)}/>
     </div>
   );
 };

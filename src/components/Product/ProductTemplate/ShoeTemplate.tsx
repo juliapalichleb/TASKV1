@@ -1,7 +1,7 @@
-import type {ShoesDto} from "../Product.ts";
 import {ProductDetail} from "../../ProductList/ProductDetail.tsx";
+import type {ShoeDto} from "../Shoe.ts";
 
-const ShoeTemplate = ({details}: {details: ShoesDto})  => {
+const ShoeTemplate = ({details}: {details: ShoeDto})  => {
   return (
       <>
           <span className="product-name">{details.name}</span>

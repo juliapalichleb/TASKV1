@@ -1,5 +1,6 @@
-import type  {SodaDto} from "../Product.ts";
 import {ProductDetail} from "../../ProductList/ProductDetail.tsx";
+import type {SodaDto} from "../Soda.ts";
+
 
 const SodaTemplate = ({details}: {details: SodaDto})  => {
   return (

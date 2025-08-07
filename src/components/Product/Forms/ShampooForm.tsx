@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { CustomInput } from "../../controls/CustomInput.tsx";
 import {ProductType } from "../Product.ts";
-import type {ShampooDto} from "../../../types/Shampoo.ts";
+import type {ShampooDto} from "../Shampoo.ts";
+
 
 const ShampooForm = ({onAdd}: {onAdd: (product: { type: ProductType.Shampoo, details: ShampooDto }) => void }) => {
   const [shampoo, setShampoo] = useState<ShampooDto>({

@@ -5,7 +5,7 @@ import {
     ProductType
 } from "../Product.ts";
 import {Gender, GenderTypeDisplayNames} from "../../../types/Gender.ts";
-import type {ShoeDto} from "../../../types/Shoe.ts";
+import type {ShoeDto} from "../Shoe.ts";
 
 const ShoeForm = ({onAdd}: {onAdd: (product: { type: ProductType.Shoe, details: ShoeDto }) => void }) => {
   const [shoe, setShoe] = useState<ShoeDto>({
