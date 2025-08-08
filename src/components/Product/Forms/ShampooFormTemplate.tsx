@@ -2,12 +2,26 @@ import {type JSX, useState} from "react";
 import { CustomInput } from "../../controls/CustomInput.tsx";
 import type {ShampooDto} from "../../../types/Shampoo.ts";
 import {ShampooFormFactory} from "../Factory/Shampoo/ShampooFormFactory.tsx";
+import {ShampooValidator} from "../../../validation/shampooSchema.ts";
 
 const ShampooFormTemplate = ({ onAdd }: { readonly onAdd: (p: ShampooDto) => void }): JSX.Element => {
     const shampoo = new ShampooFormFactory
     const [form, setForm] = useState<ShampooDto>(shampoo.clearForm());
     const setField = <K extends keyof ShampooDto>(k: K, v: ShampooDto[K]) =>
       setForm(prev => ({ ...prev, [k]: v }));
+
+  function onAddShampoo() {
+      const validator = new ShampooValidator(form)
+      const validationResult = validator.validate()
+
+      if (validationResult.valid) {
+          onAdd(form);
+          setForm(shampoo.clearForm());
+      } else {
+          alert(validationResult.errors.map(e => e.message).join("\n"));
+      }
+  }
+
 
   return (
     <div className="grid grid-cols-2 gap-x-4 gap-y-4">
@@ -55,7 +69,7 @@ const ShampooFormTemplate = ({ onAdd }: { readonly onAdd: (p: ShampooDto) => voi
 
       <button
           className="btn btn-primary col-span-2"
-          onClick={() => { onAdd(form); setForm(shampoo.clearForm()); }}
+          onClick={onAddShampoo}
       >
         Add Shampoo
       </button>

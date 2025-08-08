@@ -4,6 +4,7 @@ import { CustomSelect } from "../../controls/CustomSelect.tsx";
 import {SodaFormFactory} from "../Factory/Soda/SodaFormFactory.tsx";
 import type {SodaDto} from "../../../types/Soda.ts";
 import {SodaPackage, SodaPackageDisplayNames} from "../../../types/SodaPackage.ts";
+import {SodaValidator} from "../../../validation/sodaSchema.ts";
 
 
 const SodaFormTemplate = (({ onAdd }: { readonly onAdd: (p: SodaDto) => void }): JSX.Element => {
@@ -17,6 +18,17 @@ const SodaFormTemplate = (({ onAdd }: { readonly onAdd: (p: SodaDto) => void }):
     displayName: SodaPackageDisplayNames[type],
     }));
 
+    function onAddSoda() {
+        const validator = new SodaValidator(form)
+        const validationResult = validator.validate()
+
+        if (validationResult.valid) {
+            onAdd(form);
+            setForm(soda.clearForm());
+        } else {
+           alert(validationResult.errors.map(e => e.message).join("\n"));
+        }
+    }
 
   return (
     <div className="grid grid-cols-2 gap-x-4 gap-y-4">
@@ -70,7 +82,7 @@ const SodaFormTemplate = (({ onAdd }: { readonly onAdd: (p: SodaDto) => void }):
 
       <button
           className="btn btn-primary col-span-2"
-          onClick={() => { onAdd(form); setForm(soda.clearForm()); }}
+          onClick={ onAddSoda }
       >
         Add Soda
       </button>

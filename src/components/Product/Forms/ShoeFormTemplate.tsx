@@ -4,6 +4,7 @@ import { CustomSelect } from "../../controls/CustomSelect.tsx";
 import {ShoeFormFactory} from "../Factory/Shoe/ShoeFormFactory.tsx";
 import type {ShoeDto} from "../../../types/Shoe.ts";
 import {Gender, GenderTypeDisplayNames} from "../../../types/Gender.ts";
+import {ShoeValidator} from "../../../validation/shoeSchema.ts";
 
 const ShoeFormTemplate = ({ onAdd }: { readonly onAdd: (p: ShoeDto) => void }): JSX.Element => {
   const shoe = new ShoeFormFactory()
@@ -15,6 +16,17 @@ const ShoeFormTemplate = ({ onAdd }: { readonly onAdd: (p: ShoeDto) => void }): 
     displayName: GenderTypeDisplayNames[type],
   }));
 
+  function onAddShoe() {
+      const validator = new ShoeValidator(form)
+      const validationResult = validator.validate()
+
+      if (validationResult.valid) {
+          onAdd(form);
+          setForm(shoe.clearForm());
+      } else {
+          alert(validationResult.errors.map(e => e.message).join("\n"));
+      }
+  }
 
   return (
     <div className="grid grid-cols-2 gap-x-4 gap-y-4">
@@ -68,7 +80,7 @@ const ShoeFormTemplate = ({ onAdd }: { readonly onAdd: (p: ShoeDto) => void }): 
 
       <button
           className="btn btn-primary col-span-2"
-          onClick={() => { onAdd(form); setForm(shoe.clearForm()); }}
+          onClick={ onAddShoe }
       >
         Add Shoe
       </button>
