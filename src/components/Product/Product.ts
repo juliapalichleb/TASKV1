@@ -1,47 +1,69 @@
-import type { FC } from "react";
-
-import {Soda, type SodaDto} from "./Soda.ts";
-import {Shampoo, type ShampooDto} from "./Shampoo.ts";
-import {Shoe, type ShoeDto,} from "./Shoe.ts";
-
-type FormComponent<T> = FC<{ onAdd: (product: T) => void }>;
-type TemplateComponent<T> = FC<{ details: T }>;
+import {SodaFormFactory, SodaItemFactory, type SodaPayload} from "./Soda.tsx";
+import {ShampooFormFactory, ShampooItemFactory, type ShampooPayload} from "./Shampoo.tsx";
+import {ShoesFormFactory, ShoesItemFactory, type ShoesPayload} from "./Shoe.tsx";
+import type {ReactNode} from "react";
 
 
-type ProductType = "shampoo" | "soda" | "shoe";
 
-export type ProductDetailsMap = {
-  shampoo: ShampooDto;
-  soda: SodaDto;
-  shoe: ShoeDto;
-};
-
-
-interface Product<T extends ProductType> {
-  getFormComponent(): FormComponent<{type: T, details: ProductDetailsMap[T]}>;
-  getTemplateComponent(): TemplateComponent<ProductDetailsMap[T]>;
+// @ts-ignore
+ enum ProductKind {
+  Soda = "soda",
+  Shampoo = "shampoo",
+  Shoes = "Shoes",
 }
 
- const ProductRegistry = {
-  shampoo: Shampoo,
-  soda: Soda,
-  shoe: Shoe,
+
+
+const ProductTypeDisplayNames: Record<ProductKind, string> = {
+  [ProductKind.Soda]: "Soda",
+  [ProductKind.Shampoo]: "Shampoo",
+  [ProductKind.Shoes]: "Shoes"
 };
 
 
-const ProductTypeDisplayNames: Record<ProductType, string> = {
-  soda: "Soda",
-  shampoo: "Shampoo",
-  shoe: "Shoes",
-};
+interface IRenderItem<T> {
+  renderItem: (item:T) => ReactNode;
+}
+
+interface IRenderForm<T> {
+  renderForm(onAdd: (p: T) => void): ReactNode;
+}
+
+type Product = SodaPayload |ShampooPayload | ShoesPayload
 
 
-export {
-  type ProductType,
-  type Product,
-    ProductRegistry,
-  ProductTypeDisplayNames,
-  type TemplateComponent,
-  type FormComponent,
-};
+class ProductFactory {
+  createItem(product: Product) {
+    switch (product.type) {
+        case ProductKind.Soda:
+            return new SodaItemFactory(product);
+        case ProductKind.Shampoo:
+            return new ShampooItemFactory(product);
+        case ProductKind.Shoes:
+            return new ShoesItemFactory(product);
 
+      default:
+        throw new Error(`Unknown product type.`);
+    }
+  }
+
+   createForm(type: ProductKind) {
+    switch (type) {
+        case ProductKind.Soda:
+            return new SodaFormFactory();
+        case ProductKind.Shampoo:
+            return new ShampooFormFactory();
+        case ProductKind.Shoes:
+            return new ShoesFormFactory();
+
+      default:
+        throw new Error(`Unknown product type.`);
+    }
+  }
+}
+
+
+
+
+
+export { ProductKind, ProductTypeDisplayNames,ProductFactory, type Product, type IRenderItem, type IRenderForm }

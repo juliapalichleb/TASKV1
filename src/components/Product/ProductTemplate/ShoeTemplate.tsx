@@ -1,16 +1,17 @@
 import {ProductDetail} from "../../ProductList/ProductDetail.tsx";
-import type {ShoeDto} from "../Shoe.ts";
+import type {ShoesPayload} from "../Shoe.tsx";
 
-const ShoeTemplate = ({details}: {details: ShoeDto})  => {
+
+const ShoeTemplate = (item: ShoesPayload)  => {
   return (
-      <>
-          <span className="product-name">{details.name}</span>
-          <ProductDetail value={details.shoeSize} label={'Shoe Size'}/>
-          <ProductDetail value={details.shoeColor} label={'Shoe Color'}/>
-          <ProductDetail value={details.brand} label={'Brand'}/>
-          <ProductDetail value={details.gender} label={'Gender'}/>
-          <span className="product-price">Price: {details.price}$</span>
-      </>
+      <div className="product-card">
+          <span className="product-name">{item.name}</span>
+          <ProductDetail value={item.shoeSize} label={'Shoe Size'}/>
+          <ProductDetail value={item.shoeColor} label={'Shoe Color'}/>
+          <ProductDetail value={item.brand} label={'Brand'}/>
+          <ProductDetail value={item.gender} label={'Gender'}/>
+          <span className="product-price">Price: {item.price}$</span>
+      </div>
   )
 };
 

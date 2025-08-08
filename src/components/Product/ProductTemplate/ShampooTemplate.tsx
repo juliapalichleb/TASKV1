@@ -1,15 +1,15 @@
 import {ProductDetail} from "../../ProductList/ProductDetail.tsx";
-import type {ShampooDto} from "../Shampoo.ts";
+import { type ShampooPayload} from "../Shampoo.tsx";
 
-const ShampooTemplate = ({details}: {details: ShampooDto})  => {
+const ShampooTemplate = (item: ShampooPayload)  => {
   return (
-      <>
-          <span className="product-name">{details.name}</span>
-          <ProductDetail value={details.brand} label={'Brand'}/>
-          <ProductDetail value={details.bottleSize} label={'Bottle Size'}/>
-          <ProductDetail value={details.scent} label={'Scent'}/>
-          <span className="product-price">Price: {details.price}$</span>
-      </>
+      <div className="product-card">
+          <span className="product-name">{item.name}</span>
+          <ProductDetail value={item.brand} label={'Brand'}/>
+          <ProductDetail value={item.bottleSize} label={'Bottle Size'}/>
+          <ProductDetail value={item.scent} label={'Scent'}/>
+          <span className="product-price">Price: {item.price}$</span>
+      </div>
   )
 };
 
