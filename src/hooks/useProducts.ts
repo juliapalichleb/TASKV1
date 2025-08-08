@@ -1,5 +1,6 @@
 import {useState} from "react";
-import type {Product} from "../components/Product/Factory/ProductFactory.ts";
+import type {Product} from "../types/Product.ts";
+
 
 function useProducts() {
   const [products, setProducts] = useState<Product[]>([]);
