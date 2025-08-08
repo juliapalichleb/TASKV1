@@ -1,15 +1,15 @@
 import {type JSX, useState} from "react";
 import { CustomInput } from "../../controls/CustomInput.tsx";
 import { CustomSelect } from "../../controls/CustomSelect.tsx";
-import {type SodaForm, SodaFormFactory, SodaPackage, SodaPackageDisplayNames, type SodaPayload} from "../Soda.tsx";
+import {SodaFormFactory} from "../Factory/Soda/SodaFormFactory.tsx";
+import type {SodaDto} from "../../../types/Soda.ts";
+import {SodaPackage, SodaPackageDisplayNames} from "../../../types/SodaPackage.ts";
 
 
-
-const SodaFormTemplate = (({ onAdd }: { readonly onAdd: (p: SodaPayload) => void }): JSX.Element => {
-
-    const soda = new SodaFormFactory;
-    const [form, setForm] = useState<SodaForm>(soda.createDefaultForm());
-    const setField = <K extends keyof SodaForm>(k: K, v: SodaForm[K]) =>
+const SodaFormTemplate = (({ onAdd }: { readonly onAdd: (p: SodaDto) => void }): JSX.Element => {
+    const soda = new SodaFormFactory();
+    const [form, setForm] = useState<SodaDto>(soda.clearForm());
+    const setField = <K extends keyof SodaDto>(k: K, v: SodaDto[K]) =>
       setForm(prev => ({ ...prev, [k]: v }));
 
     const sodaOptions = Object.values(SodaPackage).map((type) => ({
@@ -70,7 +70,7 @@ const SodaFormTemplate = (({ onAdd }: { readonly onAdd: (p: SodaPayload) => void
 
       <button
           className="btn btn-primary col-span-2"
-          onClick={() => { onAdd(soda.buildItem(form)); setForm(soda.createDefaultForm()); }}
+          onClick={() => { onAdd(form); setForm(soda.clearForm()); }}
       >
         Add Soda
       </button>

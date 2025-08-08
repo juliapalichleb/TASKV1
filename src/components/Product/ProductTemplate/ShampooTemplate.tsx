@@ -1,7 +1,7 @@
-import {ProductDetail} from "../../ProductList/ProductDetail.tsx";
-import { type ShampooPayload} from "../Shampoo.tsx";
+import {ProductDetail} from "../ProductDetail.tsx";
+import type {ShampooDto} from "../../../types/Shampoo.ts";
 
-const ShampooTemplate = (item: ShampooPayload)  => {
+const ShampooTemplate = (item: ShampooDto)  => {
   return (
       <div className="product-card">
           <span className="product-name">{item.name}</span>

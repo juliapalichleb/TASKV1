@@ -1,17 +1,16 @@
-import {ProductDetail} from "../../ProductList/ProductDetail.tsx";
+import {ProductDetail} from "../ProductDetail.tsx";
+import type {SodaDto} from "../../../types/Soda.ts";
 
-import type { SodaPayload} from "../Soda.tsx";
 
-
-const SodaTemplate = ({name, brand, packageType, flavor, servingSize, price}: SodaPayload)  => {
+const SodaTemplate = (item: SodaDto)  => {
   return (
       <div className="product-card">
-        <span className="product-name">{name}</span>
-        <ProductDetail value={brand} label={'Brand'}/>
-        <ProductDetail value={packageType} label={'Package Type'}/>
-        <ProductDetail value={flavor} label={'Flavor'}/>
-        <ProductDetail value={servingSize} label={'Serving Size'}/>
-        <span className="product-price">Price: {price}$</span>
+        <span className="product-name">{item.name}</span>
+        <ProductDetail value={item.brand} label={'Brand'}/>
+        <ProductDetail value={item.packageType} label={'Package Type'}/>
+        <ProductDetail value={item.flavor} label={'Flavor'}/>
+        <ProductDetail value={item.servingSize} label={'Serving Size'}/>
+        <span className="product-price">Price: {item.price}$</span>
       </div>
   )
 };

@@ -1,13 +1,12 @@
 import {type JSX, useState} from "react";
 import { CustomInput } from "../../controls/CustomInput.tsx";
-import {type ShampooForm, ShampooFormFactory, type ShampooPayload} from "../Shampoo.tsx";
+import type {ShampooDto} from "../../../types/Shampoo.ts";
+import {ShampooFormFactory} from "../Factory/Shampoo/ShampooFormFactory.tsx";
 
-
-
-const ShampooFormTemplate = ({ onAdd }: { readonly onAdd: (p: ShampooPayload) => void }): JSX.Element => {
+const ShampooFormTemplate = ({ onAdd }: { readonly onAdd: (p: ShampooDto) => void }): JSX.Element => {
     const shampoo = new ShampooFormFactory
-    const [form, setForm] = useState<ShampooForm>(shampoo.createDefaultForm());
-    const setField = <K extends keyof ShampooForm>(k: K, v: ShampooForm[K]) =>
+    const [form, setForm] = useState<ShampooDto>(shampoo.clearForm());
+    const setField = <K extends keyof ShampooDto>(k: K, v: ShampooDto[K]) =>
       setForm(prev => ({ ...prev, [k]: v }));
 
   return (
@@ -56,7 +55,7 @@ const ShampooFormTemplate = ({ onAdd }: { readonly onAdd: (p: ShampooPayload) =>
 
       <button
           className="btn btn-primary col-span-2"
-          onClick={() => { onAdd(shampoo.buildItem(form)); setForm(shampoo.createDefaultForm()); }}
+          onClick={() => { onAdd(form); setForm(shampoo.clearForm()); }}
       >
         Add Shampoo
       </button>

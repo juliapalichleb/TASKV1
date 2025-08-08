@@ -1,15 +1,14 @@
 import {type JSX, useState} from "react";
 import { CustomInput } from "../../controls/CustomInput.tsx";
 import { CustomSelect } from "../../controls/CustomSelect.tsx";
-
+import {ShoeFormFactory} from "../Factory/Shoe/ShoeFormFactory.tsx";
+import type {ShoeDto} from "../../../types/Shoe.ts";
 import {Gender, GenderTypeDisplayNames} from "../../../types/Gender.ts";
-import {type ShoesForm, ShoesFormFactory, type ShoesPayload} from "../Shoe.tsx";
 
-
-const ShoeFormTemplate = ({ onAdd }: { readonly onAdd: (p: ShoesPayload) => void }): JSX.Element => {
-  const shoe = new ShoesFormFactory
-  const [form, setForm] = useState<ShoesForm>(shoe.createDefaultForm());
-  const setField = <K extends keyof ShoesForm>(k: K, v: ShoesForm[K]) =>
+const ShoeFormTemplate = ({ onAdd }: { readonly onAdd: (p: ShoeDto) => void }): JSX.Element => {
+  const shoe = new ShoeFormFactory()
+  const [form, setForm] = useState<ShoeDto>(shoe.clearForm());
+  const setField = <K extends keyof ShoeDto>(k: K, v: ShoeDto[K]) =>
     setForm(prev => ({ ...prev, [k]: v }));
   const genderOptions = Object.values(Gender).map((type) => ({
     value: type,
@@ -69,7 +68,7 @@ const ShoeFormTemplate = ({ onAdd }: { readonly onAdd: (p: ShoesPayload) => void
 
       <button
           className="btn btn-primary col-span-2"
-          onClick={() => { onAdd(shoe.buildItem(form)); setForm(shoe.createDefaultForm()); }}
+          onClick={() => { onAdd(form); setForm(shoe.clearForm()); }}
       >
         Add Shoe
       </button>

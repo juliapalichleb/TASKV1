@@ -17,6 +17,17 @@
   display: flex;
 }
 
+.gap-20 {
+  column-gap: 200px;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.align-center {
+  align-content: center;
+}
 .flex-col {
   flex-direction: column;
 }
@@ -169,3 +180,5 @@ input:focus {
     justify-content: center ;
     align-items: center;
 }
+
+
